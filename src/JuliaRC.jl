@@ -39,6 +39,7 @@ if in_repl()
 
     check_OhMyREPL()
     import OhMyREPL
+    using Crayons: Crayon
     STH = OhMyREPL.Passes.SyntaxHighlighter
 
     # aliases
