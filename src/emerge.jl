@@ -1,6 +1,3 @@
-export emerge
-
-
 function recompile_packages()
     for pkg in keys(Pkg.installed())
         try
@@ -12,13 +9,6 @@ function recompile_packages()
         finally
             println(SEPARATOR)
         end
-    end
-end
-
-function update_winrpm()
-    @static if is_windows()
-        @eval using WinRPM
-        WinRPM.update()
     end
 end
 
@@ -44,7 +34,6 @@ end
 function emerge()
     tic()
     Pkg.update()
-    update_winrpm()
     Pkg.build()
     recompile_packages()
     # rebuild_userimg()
