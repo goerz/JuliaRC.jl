@@ -1,5 +1,5 @@
 """Custom color scheme (adapts to terminal background)"""
-function _create_goerz_cs(background)
+function _create_goerz_cs(background::String)
     # Adapated from Vim color scheme
     if background == "light"
         my_gray40     =  59
