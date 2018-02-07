@@ -20,12 +20,6 @@ macro dump(expr)
     :(dump($(quot(expr))))
 end
 
-
-macro macroexpand(expr)
-    :(macroexpand($(quot(expr))))
-end
-
-
 macro esc(sym)
     isexpr(sym, :quote) || throw(ArgumentError("expected quoted symbol"))
     esc(sym.args[1])

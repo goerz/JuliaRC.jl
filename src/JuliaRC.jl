@@ -45,7 +45,7 @@ if in_repl()
     export ls
 
     # helpers
-    export @sexpr, @methods, @methodswith, @dump, @macroexpand, @esc
+    export @sexpr, @methods, @methodswith, @dump, @esc
 
     # emerge
     export emerge
