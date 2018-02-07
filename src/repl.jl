@@ -1,15 +1,3 @@
-"""Return "light" or "dark", depending on the color of the terminal
-background"""
-function background()
-    bg = split(get(ENV, "COLORFGBG", "0;15"), ";")[2]
-    if bg == "0"
-        return "dark"
-    else
-        return "light"
-    end
-end
-
-
 """Custom color scheme (adapts to terminal background)"""
 function _create_goerz_cs(background)
     # Adapated from Vim color scheme
@@ -69,7 +57,7 @@ end
 function ohmyrepl()
     OhMyREPL.enable_autocomplete_brackets(false)
     #=OhMyREPL.enable_highlight_markdown(false)=#
-    _background = background()
+    _background = OhMyREPL.background()
     if _background == "light"
         OhMyREPL.input_prompt!("julia> ", :black)
     end
@@ -83,7 +71,7 @@ end
 
 """Change only the colors that OhMyRepl can't handle"""
 function customize_colors(repl)
-    if background() == "light"
+    if OhMyREPL.background() == "light"
         #=repl.prompt_color = Base.text_colors[:black]=#
         repl.help_color = Base.text_colors[:black]
         #=repl.shell_color = Base.text_colors[:black]=#
