@@ -34,39 +34,40 @@ function in_repl()
     return true
 end
 
+function init()
+    if in_repl()
+        check_OhMyREPL()
+        push!(LOAD_PATH, pwd())
+        ohmyrepl()
+        atreplinit(customize_colors)
 
-if in_repl()
-
-    check_OhMyREPL()
-    import OhMyREPL
-    using Crayons: Crayon
-    STH = OhMyREPL.Passes.SyntaxHighlighter
-
-    # aliases
-    export ls
-
-    # helpers
-    export @sexpr, @methods, @methodswith, @dump, @esc
-
-    # emerge
-    export emerge
-
-    source_files = [
-        "constants.jl",
-        "aliases.jl",
-        "helpers.jl",
-        "emerge.jl",
-        "repl.jl",
-        "setup.jl",
-    ]
-
-    foreach(include, source_files)
-
-    setup()
-
-    println("Julia REPL has been initalized from JuliaRC package")
-
+        println("Julia REPL has been initalized from JuliaRC package")
+    end
 end
 
+
+check_OhMyREPL()
+import OhMyREPL
+using Crayons: Crayon
+STH = OhMyREPL.Passes.SyntaxHighlighter
+
+# aliases
+export ls
+
+# helpers
+export @sexpr, @methods, @methodswith, @dump, @esc
+
+# emerge
+export emerge
+
+source_files = [
+    "constants.jl",
+    "aliases.jl",
+    "helpers.jl",
+    "emerge.jl",
+    "repl.jl",
+]
+
+foreach(include, source_files)
 
 end

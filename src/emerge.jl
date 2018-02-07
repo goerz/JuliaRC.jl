@@ -12,30 +12,24 @@ function recompile_packages()
     end
 end
 
-# include(joinpath(JULIA_HOME, Base.DATAROOTDIR, "julia", "build_sysimg.jl"))
+"""
+    emerge(;update=true, build=true, precompile=true)
 
-#=
-function rebuild_userimg()
-    img_path = joinpath(
-        homedir(),
-        ".julia",
-        "v" * string(VERSION)[1:3],
-        "userimg"
-    )
-    build_sysimg(
-        img_path,
-        "native",
-        joinpath(homedir(), "userimg.jl"),
-        force = true
-    )
-end
-=#
+update: Update all packages
 
-function emerge()
+build: re-build all packages
+
+precompile: precompile all packages by importing them
+"""
+function emerge(;update=true, build=true, precompile=true)
     tic()
-    Pkg.update()
-    Pkg.build()
-    recompile_packages()
-    # rebuild_userimg()
+    if update Pkg.update() end
+    if build Pkg.build() end
+    if precompile recompile_packages() end
+    println("You may now rebuild the user image:\n")
+    println("    include(joinpath(JULIA_HOME, Base.DATAROOTDIR, \"julia\", \"build_sysimg.jl\"))")
+    println("    @time build_sysimg(default_sysimg_path(), \"native\", joinpath(homedir(), \".userimg.jl\"); force=true)\n")
+    println("where ~/.userimg.jl contains \"using\" statements for all " *
+            "packages you want to include in the image")
     toc()
 end

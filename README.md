@@ -13,4 +13,5 @@ julia> Pkg.clone("https://github.com/goerz/JuliaRC.jl")
 ```julia
 # ~/.juliarc.jl
 using JuliaRC
+JuliaRC.init()
 ```
