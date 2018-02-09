@@ -56,6 +56,7 @@ export ls
 
 # helpers
 export @sexpr, @methods, @methodswith, @dump, @esc
+export subtypetree, supertypes
 
 # emerge
 export emerge
